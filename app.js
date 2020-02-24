@@ -5,8 +5,7 @@ const logger = require ('morgan');
 const mongoose = require ('mongoose');
 const getSecret = require('./secrets');
 
-const user = require ('./routes/user');
-const file = require ('./routes/file');
+const session = require ('./routes/session');
 
 const app = express();
 const API_PORT = process.env.PORT || 3001;
@@ -29,8 +28,7 @@ app.use(function(req, res, next) {
 
 app.use(express.static('public'));
 
-app.use('/api/users', user);
-app.use('/api/files', file);
+app.use('/logging/session', session);
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, './public', 'index.html'));

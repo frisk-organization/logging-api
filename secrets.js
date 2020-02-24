@@ -1,7 +1,7 @@
 // secrets.js
 
 const secrets = {
-  bdUri: 'mongodb://heroku_9c217fk4:8n2chmmcep5001olksmv0kb24m@ds241308.mlab.com:41308/heroku_9c217fk4'
+  bdUri: 'mongodb://heroku_6nnpmp84:afdh3ifv0tartla3vqcqc6m6h2@ds025742.mlab.com:25742/heroku_6nnpmp84'
 };
 
 module.exports = secrets;
