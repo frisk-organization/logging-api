@@ -19,14 +19,13 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  //  session, ipUser, ipMachine
+  //  session, ipMachine
   Session.getSession(req.body.session, (err, session) => {
     if(err) res.status(400).json(err);
     else {
       if (session) {
         Session.addUser({
             idSession: req.body.session,
-            ipUser: req.body.ipUser,
           }, (errUser, sessionUser) => {
             if(errUser) res.status(400).json(errUser);
             else res.status(200).json(sessionUser);
@@ -68,22 +67,6 @@ router.put('/closeMachine', (req, res) => {
 router.put('/closeSession', (req, res) => {
   //   idSession
   Session.closeSession(req.body, (err, session) => {
-    if(err) res.status(400).json(err);
-    else res.status(200).json(session);
-  });
-});
-
-router.put('/addUser', (req, res) => {
-  //   idSession, ipUser
-  Session.addUser(req.body, (err, session) => {
-    if(err) res.status(400).json(err);
-    else res.status(200).json(session);
-  });
-});
-
-router.put('/closeUser', (req, res) => {
-  //   idSession, idUser
-  Session.closeUser(req.body, (err, session) => {
     if(err) res.status(400).json(err);
     else res.status(200).json(session);
   });
