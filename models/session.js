@@ -56,6 +56,10 @@ module.exports.getAllSessions = (callback) => {
   Session.find(callback);
 };
 
+module.exports.getSession = (id, callback) => {
+  Session.findOne({ session: id }, callback);
+};
+
 module.exports.addSession = (session, callback) => {
   const newSession = new Session();
 
