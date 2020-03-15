@@ -6,11 +6,6 @@ const SessionSchema = new Schema({
   session: { type: String },
   initTime: { type: Date, default: Date.now() },
   endTime: { type: Date },
-  user: [{
-    ip: { type: String },
-    initTime: { type: Date, default: Date.now() },
-    endTime: { type: Date },
-  }],
   machine: [{
     ip: { type: String },
     initTime: { type: Date, default: Date.now() },
@@ -65,12 +60,6 @@ module.exports.addSession = (session, callback) => {
 
   newSession.session = session.session;
 
-  const user = [];
-  user.push({
-    ip: session.ipUser,
-  });
-  newSession.user = user;
-
   const machine = [];
   machine.push({
     ip: session.ipMachine,
@@ -113,26 +102,6 @@ module.exports.closeMachine = (req, callback) => {
 module.exports.closeSession = (req, callback) => {
   Session.findOne({ _id: req.idSession }, function (err, session) {
     session.endTime = Date.now();
-
-    session.save(callback);
-  });
-};
-
-module.exports.addUser = (req, callback) => {
-  Session.findOne({ _id: req.idSession }, function (err, session) {
-    session.user.push({
-      ip: req.ipUser,
-    });
-
-    session.save(callback);
-  });
-};
-
-module.exports.closeUser = (req, callback) => {
-  Session.findOne({ _id: req.idSession }, function (err, session) {
-    const index = session.user.map(e => e._id).indexOf(req.idUser);
-
-    session.user[index].endTime = Date.now();
 
     session.save(callback);
   });
