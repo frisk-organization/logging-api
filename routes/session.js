@@ -23,14 +23,7 @@ router.post('/', (req, res) => {
   Session.getSession(req.body.session, (err, session) => {
     if(err) res.status(400).json(err);
     else {
-      if (session) {
-        Session.addUser({
-            idSession: req.body.session,
-          }, (errUser, sessionUser) => {
-            if(errUser) res.status(400).json(errUser);
-            else res.status(200).json(sessionUser);
-        });
-      } else {
+      if (!session) {
         Session.addSession(req.body, (errSession, sessionSession) => {
           if(errSession) res.status(400).json(errSession);
           else res.status(200).json(sessionSession);
