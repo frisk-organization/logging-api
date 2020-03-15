@@ -20,10 +20,24 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   //  session, ipUser, ipMachine
-  if 
-  Session.addSession(req.body, (err, session) => {
+  Session.getSession(req.body.session, (err, session) => {
     if(err) res.status(400).json(err);
-    else res.status(200).json(session);
+    else {
+      if (session) {
+        Session.addUser({
+            idSession: req.body.session,
+            ipUser: req.body.ipUser,
+          }, (errUser, sessionUser) => {
+            if(errUser) res.status(400).json(errUser);
+            else res.status(200).json(sessionUser);
+        });
+      } else {
+        Session.addSession(req.body, (errSession, sessionSession) => {
+          if(errSession) res.status(400).json(errSession);
+          else res.status(200).json(sessionSession);
+        });
+      }
+    }
   });
 });
 
