@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  //   card, ipUser, ipMachine
+  //   ipUser, ipMachine
   Session.addSession(req.body, (err, session) => {
     if(err) res.status(400).json(err);
     else res.status(200).json(session);
