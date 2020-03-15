@@ -4,6 +4,13 @@ const Session = require('../models/session'); // link route in the models
 
 const router = express.Router(); // express tool for make the route 'requires'
 
+router.get('/:id', (req, res) => {
+  Session.getSession(req.params.id, (err, session) => {
+    if(err) res.status(400).json(err);
+    else res.status(200).json(session);
+  });
+});
+
 router.get('/', (req, res) => {
   Session.getAllSessions((err, sessions) => {
     if(err) res.status(400).json(err);
@@ -12,7 +19,8 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  //   ipUser, ipMachine
+  //  session, ipUser, ipMachine
+  if 
   Session.addSession(req.body, (err, session) => {
     if(err) res.status(400).json(err);
     else res.status(200).json(session);
