@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const SessionSchema = new Schema({
-  card: { type: String },
+  session: { type: String },
   initTime: { type: Date, default: Date.now() },
   endTime: { type: Date },
   user: [{
@@ -59,7 +59,7 @@ module.exports.getAllSessions = (callback) => {
 module.exports.addSession = (session, callback) => {
   const newSession = new Session();
 
-  newSession.card = session.card;
+  newSession.session = session.session;
 
   const user = [];
   user.push({
